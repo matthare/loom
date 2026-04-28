@@ -9,9 +9,9 @@
     :root {
       --color-bg:        #fdf8f2;
       --color-surface:   #fff9f2;
-      --color-primary:   #278ef5;   /* deep rose */
-      --color-secondary: #f58e27;   /* warm terracotta */
-      --color-accent:    #d4a96a;   /* golden straw */
+      --color-primary:   #278ef5;
+      --color-secondary: #f58e27;
+      --color-accent:    #d4a96a;
       --color-text:      #064079;
       --color-muted:     #7a6a5e;
       --color-border:    #e8d9c8;
@@ -414,6 +414,11 @@
 
     /* ─── Responsive ────────────────────────────────────────────── */
 
+    /* small screen (≤ 1200px) */
+    @media (max-width: 1200px) {
+      .hero {min-height: 66vh;}
+    }
+
     /* Tablet (≤ 900px) */
     @media (max-width: 900px) {
       .gallery-grid {
@@ -429,6 +434,9 @@
       .about-image { max-width: 480px; }
       .contact-cards {
         grid-template-columns: repeat(2, 1fr);
+      }
+      .hero {
+        min-height: 44vh;
       }
     }
 
@@ -454,7 +462,7 @@
       }
       .nav__toggle { display: flex; }
 
-      .hero { min-height: 75vh; }
+      .hero { min-height: 44vh; }
       .btn--outline { margin-left: 0; margin-top: 0.6rem; }
       .hero__content .btn { display: block; width: 100%; max-width: 260px; margin: 0.4rem auto; }
 
