@@ -15,8 +15,8 @@
   <style>
     /* ─── Design tokens ─────────────────────────────────────────── */
     :root {
-      --color-bg:        #fdf8f2;
-      --color-surface:   #fff9f2;
+      --color-bg:        #fffaf5;
+      --color-surface:   #fffaf5;
       --color-primary:   #278ef5;
       --color-secondary: #f58e27;
       --color-accent:    #d4a96a;
@@ -182,7 +182,13 @@
       letter-spacing: 0.04em;
       transition: transform var(--transition), box-shadow var(--transition);
     }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.2); text-decoration: none; }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      text-decoration: none;
+      background: #fff;
+      color: var(--color-primary);
+    }
 
     .btn--light {
       background: #fff;
@@ -334,6 +340,15 @@
       border: 1px solid rgba(139,58,58,0.18);
     }
 
+    /* ─── Events -───────────────────────────────────────────────── */
+
+    .event-cards {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      justify-items: center;
+      gap: 1.5rem;
+    }
+
     /* ─── Contact ───────────────────────────────────────────────── */
     #contact {
       //background: linear-gradient(135deg, #8b3a3a 0%, #a0553a 100%);
@@ -474,6 +489,7 @@
       <ul class="nav__links" id="navLinks">
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#about">About</a></li>
+        <li><a href="#events">Events</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="nav__toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
@@ -490,7 +506,7 @@
       <p class="hero__subtitle">
 	Handcrafted Textiles
       </p>
-      <a href="#gallery" class="btn btn--light">View Gallery</a>
+      <a href="#gallery" class="btn btn--outline">View Gallery</a>
       <a href="#contact" class="btn btn--outline">Get in Touch</a>
     </div>
   </header>
@@ -523,10 +539,10 @@
 	  <a href="images/DSCF0206.JPG" target="_blank">
             <img
               src="images/DSCF0206.JPG"
-              alt="Threading the comb"
+              alt="Threading the reed"
               loading="lazy"
             />
-            <span class="gallery-caption">Threading the Comb</span>
+            <span class="gallery-caption">Threading the Reed</span>
 	  </a>
         </div>
 
@@ -646,6 +662,41 @@
 	    towels, napkins, and decorative wall hangings. Custom commissions are also available.
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Events ── -->
+  <section class="section" id="events">
+    <div class="section__inner">
+      <div class="section__header">
+        <h2>Events</h2>
+        <div class="divider"></div>
+        <p>
+	  Upcoming places where you can experience Rose Handwovens&rsquo; fiber arts first hand. 
+	</p>
+      </div>
+      <div class="event-cards">
+	<div></div>
+	<a href="https://artscollabmedford.org/medfordopenstudios#!directory" target="_blank">
+	  <img
+	    data-stretch="false"
+	    data-image-dimensions="600x600"
+	    data-image-focal-point="0.5,0.5"
+	    data-sqsp-image-block-image="" alt=""
+	    data-licensed-asset-preview="false"
+	    data-load="false"
+	    elementtiming="system-image-block"
+	    src="https://images.squarespace-cdn.com/content/v1/63c5effddc16487236b6b553/4f2c83cc-fc43-48e6-9881-c323bc145f84/2+%282%29.png"
+	    width="600"
+	    height="600"
+	    sizes="(max-width: 640px) 100vw, (max-width: 767px) 100vw, 50vw"
+	    loading="lazy"
+	    decoding="async"
+	    data-loader="sqs"
+	    >
+	</a>
+	<div><div>
       </div>
     </div>
   </section>
