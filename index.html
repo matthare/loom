@@ -310,6 +310,7 @@
       overflow: hidden;
       box-shadow: 0 8px 32px rgba(0,0,0,0.12);
       aspect-ratio: 3/4;
+      grid-row: span 2;
     }
     .about-image img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -318,7 +319,8 @@
       margin-bottom: 0.5rem;
     }
     .about-text p {
-      color: var(--color-muted);
+      grid-row: span 1;
+      color: var(--color-text);
       margin-bottom: 1.1rem;
     }
 
@@ -504,7 +506,7 @@
       <p class="hero__eyebrow"></p>
       <h1 class="hero__title">Rose Handwovens</h1>
       <p class="hero__subtitle">
-	Handcrafted Textiles
+	Textile Studio
       </p>
       <a href="#gallery" class="btn btn--outline">View Gallery</a>
       <a href="#contact" class="btn btn--outline">Get in Touch</a>
@@ -518,7 +520,6 @@
         <h2>Gallery</h2>
         <div class="divider"></div>
         <p>
-	  A selection of original woven works: wall hangings, blankets, table linens.
 	</p>
       </div>
 
@@ -557,14 +558,25 @@
 	  </a>
         </div>
 
-        <div class="gallery-item">
-	  <a href="images/DSCF0961.JPG" target="_blank">
+        <div class="gallery-item gallery-item--featured">
+	  <a href="images/overshot.jpg" target="_blank">
             <img
-              src="images/DSCF0961.JPG"
-              alt="Plaid"
+              src="images/overshot.jpg"
+              alt="Overshot"
               loading="lazy"
             />
-            <span class="gallery-caption">Plaid</span>
+            <span class="gallery-caption">Overshot</span>
+	  </a>
+        </div>
+
+        <div class="gallery-item">
+	  <a href="images/IMG7837.jpg" target="_blank">
+            <img
+              src="images/IMG7837.jpg"
+              alt="Tea Towel"
+              loading="lazy"
+            />
+            <span class="gallery-caption">Tea Towel</span>
 	  </a>
         </div>
 
@@ -576,6 +588,17 @@
               loading="lazy"
             />
             <span class="gallery-caption">Fringe</span>
+	  </a>
+        </div>
+
+        <div class="gallery-item">
+	  <a href="images/bed_blanket.jpg" target="_blank">
+            <img
+              src="images/bed_blanket.jpg"
+              alt="Bed Blanket"
+              loading="lazy"
+            />
+            <span class="gallery-caption">Bed Blanket</span>
 	  </a>
         </div>
 
@@ -624,13 +647,13 @@
         </div>
 
         <div class="gallery-item">
-	  <a href="images/IMG7837.jpg" target="_blank">
+	  <a href="images/DSCF0961.JPG" target="_blank">
             <img
-              src="images/IMG7837.jpg"
-              alt="Tea Towel"
+              src="images/DSCF0961.JPG"
+              alt="Plaid"
               loading="lazy"
             />
-            <span class="gallery-caption">Tea Towel</span>
+            <span class="gallery-caption">Plaid</span>
 	  </a>
         </div>
 
@@ -642,6 +665,7 @@
   <section class="section" id="about">
     <div class="section__inner">
       <div class="about-layout">
+	
         <div class="about-image">
           <img
             src="images/IMG_6571.jpg"
@@ -649,19 +673,48 @@
             loading="lazy"
           />
         </div>
+	
         <div class="about-text">
           <h2>About the Studio</h2>
           <div class="divider" style="margin: 0.8rem 0 1.4rem;"></div>
           <p>
-            Elena Rose of Rose Handwovens creates handwoven textiles on a nineteenth
-	    century counterbalance floor loom. She works out of her home studio in Medford.
-	    She began weaving at age nine and continues to explore weave structures and techniques. 
+	    Elena Rose of Rose Handwovens creates handwoven textiles on a nineteenth century
+	    counterbalance floor loom. She works out of her home studio in Medford. 
           </p>
           <p>
-            Elena works in 100% natural wool and cotton. Her inventory includes blankets, scarves,
-	    towels, napkins, and decorative wall hangings. Custom commissions are also available.
+	    At nine years old, Elena encountered a table loom for the first time at a local
+	    summer program called Heldeberg Workshop and discovered a passion for weaving.
+	    She continued to take classes at the Workshop each summer through high school and,
+	    many years later, returned to teach budding fiber artists in the same program.
+          </p>
+	</div>
+	
+        <div class="about-image">
+          <img
+            src="images/ERose.jpg"
+            alt="Weaver"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="about-text">
+          <p>
+	    In 2021, Elena enrolled in Foundations of Weaving at the Marshfield School of
+	    Weaving and realized a love for the scale and complexities of the counterbalance
+	    loom as well. Each summer since, she has made a pilgrimage to Vermont to create
+	    alongside other artists. During the summer of 2026, Elena will be a guest
+	    instructor at the Weaver’s Croft in Vermont, teaching a class on the overshot
+	    technique. 
+          </p>
+          <p>
+	    In her personal practice, Elena continues to explore weave structures and
+	    techniques. Working 100% natural wool and cotton, her inventory includes
+	    blankets, scarves, towels, napkins, and decorative wall hangings. Custom
+	    commissions are also available.
           </p>
         </div>
+	
+	
       </div>
     </div>
   </section>
@@ -673,29 +726,19 @@
         <h2>Events</h2>
         <div class="divider"></div>
         <p>
-	  Upcoming places where you can experience Rose Handwovens&rsquo; fiber arts first hand. 
 	</p>
       </div>
       <div class="event-cards">
 	<div></div>
 	<a href="https://artscollabmedford.org/medfordopenstudios#!directory" target="_blank">
 	  <img
-	    data-stretch="false"
-	    data-image-dimensions="600x600"
-	    data-image-focal-point="0.5,0.5"
-	    data-sqsp-image-block-image="" alt=""
-	    data-licensed-asset-preview="false"
-	    data-load="false"
-	    elementtiming="system-image-block"
-	    src="https://images.squarespace-cdn.com/content/v1/63c5effddc16487236b6b553/4f2c83cc-fc43-48e6-9881-c323bc145f84/2+%282%29.png"
-	    width="600"
-	    height="600"
-	    sizes="(max-width: 640px) 100vw, (max-width: 767px) 100vw, 50vw"
+	    src="events/medford2026.jpg"
+	    #width="600"
+	    #height="600"
 	    loading="lazy"
-	    decoding="async"
-	    data-loader="sqs"
 	    >
 	</a>
+	<span>I will be in Breed Hall at Tufts University</span>
 	<div><div>
       </div>
     </div>
