@@ -254,6 +254,7 @@
       aspect-ratio: 3/2;
       box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       transition: transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
     }
 
     .gallery-item:hover {
@@ -294,6 +295,43 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* ─── Image Modal ───────────────────────────────────────────── */
+    .img-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.9);
+      align-items: center;
+      justify-content: center;
+    }
+    .img-modal.is-open {
+      display: flex;
+    }
+    .img-modal__img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+      display: block;
+    }
+    .img-modal__close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2.5rem;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.85;
+      transition: opacity var(--transition);
+      z-index: 1001;
+    }
+    .img-modal__close:hover { opacity: 1; }
 
     /* ─── About ─────────────────────────────────────────────────── */
     #about { background: var(--color-bg); }
@@ -525,136 +563,112 @@
 
       <div class="gallery-grid">
 
-        <div class="gallery-item gallery-item--featured">
-	  <a href="images/DSCF0305.JPG" target="_blank">
+        <div class="gallery-item gallery-item--featured" data-modal-src="images/DSCF0305.JPG">
             <img
               src="images/DSCF0305.JPG"
               alt="warp"
               loading="lazy"
             />
             <span class="gallery-caption">Warp Chain</span>
-	  </a>
         </div>
 
-        <div class="gallery-item">
-	  <a href="images/DSCF0206.JPG" target="_blank">
+        <div class="gallery-item" data-modal-src="images/DSCF0206.JPG">
             <img
               src="images/DSCF0206.JPG"
               alt="Threading the reed"
               loading="lazy"
             />
             <span class="gallery-caption">Threading the Reed</span>
-	  </a>
         </div>
 
-        <div class="gallery-item">
-	  <a href="images/DSCF0773.JPG" target="_blank">
+        <div class="gallery-item" data-modal-src="images/DSCF0773.JPG">
             <img
               src="images/DSCF0773.JPG"
               alt="Wool blankets"
               loading="lazy"
             />
             <span class="gallery-caption">Wool Blankets</span>
-	  </a>
         </div>
 
-        <div class="gallery-item gallery-item--featured">
-	  <a href="images/overshot.jpg" target="_blank">
+        <div class="gallery-item gallery-item--featured" data-modal-src="images/overshot.jpg">
             <img
               src="images/overshot.jpg"
               alt="Overshot"
               loading="lazy"
             />
             <span class="gallery-caption">Overshot</span>
-	  </a>
         </div>
 
-        <div class="gallery-item">
-	  <a href="images/IMG7837.jpg" target="_blank">
+        <div class="gallery-item" data-modal-src="images/IMG7837.jpg">
             <img
               src="images/IMG7837.jpg"
               alt="Tea Towel"
               loading="lazy"
             />
             <span class="gallery-caption">Tea Towel</span>
-	  </a>
         </div>
 
-        <div class="gallery-item">
-	  <a href="images/DSCF0799.JPG" target="_blank">
+        <div class="gallery-item" data-modal-src="images/DSCF0799.JPG">
             <img
               src="images/DSCF0799.JPG"
               alt="Fringe"
               loading="lazy"
             />
             <span class="gallery-caption">Fringe</span>
-	  </a>
         </div>
 
-        <div class="gallery-item">
-	  <a href="images/bed_blanket.jpg" target="_blank">
+        <div class="gallery-item" data-modal-src="images/bed_blanket.jpg">
             <img
               src="images/bed_blanket.jpg"
               alt="Bed Blanket"
               loading="lazy"
             />
             <span class="gallery-caption">Bed Blanket</span>
-	  </a>
         </div>
 
-        <div class="gallery-item">
-	  <a href="images/DSCF0223.JPG" target="_blank">
+        <div class="gallery-item" data-modal-src="images/DSCF0223.JPG">
             <img
               src="images/DSCF0223.JPG"
               alt="Weaving"
               loading="lazy"
             />
             <span class="gallery-caption">Weaving</span>
-	  </a>
         </div>
 
-        <div class="gallery-item">
-	  <a href="images/DSCF0741.JPG" target="_blank">
+        <div class="gallery-item" data-modal-src="images/DSCF0741.JPG">
             <img
               src="images/DSCF0741.JPG"
               alt="Hand towels"
               loading="lazy"
             />
             <span class="gallery-caption">Hand Towels</span>
-	  </a>
         </div>
 
-        <div class="gallery-item gallery-item--featured">
-	  <a href="images/DSCF0296.JPG" target="_blank">
+        <div class="gallery-item gallery-item--featured" data-modal-src="images/DSCF0296.JPG">
             <img
               src="images/DSCF0296.JPG"
               alt="Warping board"
               loading="lazy"
             />
             <span class="gallery-caption">Warping Board</span>
-	  </a>
         </div>
 
-        <div class="gallery-item">
-	  <a href="images/DSCF0966.JPG" target="_blank">
+        <div class="gallery-item" data-modal-src="images/DSCF0966.JPG">
             <img
               src="images/DSCF0966.JPG"
               alt="Wool scarves"
               loading="lazy"
             />
             <span class="gallery-caption">Wool Scarves</span>
-	  </a>
         </div>
 
-        <div class="gallery-item">
-	  <a href="images/DSCF0961.JPG" target="_blank">
+        <div class="gallery-item" data-modal-src="images/DSCF0961.JPG">
             <img
               src="images/DSCF0961.JPG"
               alt="Plaid"
               loading="lazy"
             />
             <span class="gallery-caption">Plaid</span>
-	  </a>
         </div>
 
       </div>
@@ -791,6 +805,12 @@
     </div>
   </section>
 
+  <!-- ── Image Modal ── -->
+  <div class="img-modal" id="imgModal" role="dialog" aria-modal="true" aria-label="Full-size image">
+    <button class="img-modal__close" id="imgModalClose" aria-label="Close">&times;</button>
+    <img class="img-modal__img" id="imgModalImg" src="" alt="" />
+  </div>
+
   <!-- ── Footer ── -->
   <footer class="footer">
     <p>&copy; <span id="year"></span> <strong>Rose Handwovens</strong>. All rights reserved.</p>
@@ -800,7 +820,42 @@
     // Current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile nav toggle
+    // Image modal
+    const modal      = document.getElementById('imgModal');
+    const modalImg   = document.getElementById('imgModalImg');
+    const modalClose = document.getElementById('imgModalClose');
+
+    function openModal(src, alt) {
+      modalImg.src = src;
+      modalImg.alt = alt || '';
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+      modalImg.src = '';
+    }
+
+    document.querySelectorAll('[data-modal-src]').forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        openModal(item.dataset.modalSrc, img ? img.alt : '');
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+
+
     const toggle = document.getElementById('navToggle');
     const links  = document.getElementById('navLinks');
     toggle.addEventListener('click', () => {
