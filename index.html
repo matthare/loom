@@ -41,6 +41,9 @@
       font-family: var(--font-body);
       line-height: 1.65;
     }
+    body.modal-open {
+      overflow: hidden;
+    }
 
     img {
       display: block;
@@ -828,13 +831,14 @@
     function openModal(src, alt) {
       modalImg.src = src;
       modalImg.alt = alt || '';
+      modal.setAttribute('aria-label', alt ? 'Image: ' + alt : 'Full-size image');
       modal.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
     }
 
     function closeModal() {
       modal.classList.remove('is-open');
-      document.body.style.overflow = '';
+      document.body.classList.remove('modal-open');
       modalImg.src = '';
     }
 
