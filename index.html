@@ -414,7 +414,46 @@
     }
 
     /* ─── Events -───────────────────────────────────────────────── */
+    .carousel-container {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden; /* Hides the slides that are out of frame */
+      border-radius: 8px;
+    }
 
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out; /* Smooth sliding transition */
+    }
+
+    .carousel-slide {
+      min-width: 100%; /* Force each slide to take up the full container width */
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      display: block;
+    }
+
+    /* Button Styling */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 15px;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 50%;
+    }
+
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+    .carousel-btn:hover { background-color: rgba(0, 0, 0, 0.8); }
+    
     .event-cards {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -766,6 +805,30 @@
   </section>
 
   <!-- ── Events ── -->
+  <div class="carousel-container">
+    <!-- The moving track holding all items -->
+    <div class="carousel-track">
+      <div class="event-cards, carousel-slide">
+	<a href="https://goreplace.org/sheepshearing-festival" target="_blank">
+	  <img src="events/gore_place_sheep.jpg" alt="Gore Place Sheep Shearing Festival event poster" loading="lazy">
+	</a>
+	<span>Gore Place Sheep Shearing Festival 2026</span>
+      </div>
+      <div class="event-cards, carousel-slide">
+	<a href="https://artscollabmedford.org/medfordopenstudios#!directory" target="_blank">
+	  <img src="events/medford2026.jpg" alt="Medford Open Studios 2026 event poster" loading="lazy">
+	</a>
+	<span>I will be in Breed Hall at Tufts University</span>
+      </div>
+      <div class="carousel-slide"><img src="https://picsum.photos" alt="Slide 3"></div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button class="carousel-btn prev-btn">&#10094;</button>
+    <button class="carousel-btn next-btn">&#10095;</button>
+  </div>
+
+
   <section class="section" id="events">
     <div class="section__inner">
       <div class="section__header">
@@ -913,6 +976,43 @@
         toggle.setAttribute('aria-expanded', 'false');
       })
     );
+
+    // Carousel stuff
+    // Select required DOM elements
+    const track = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    // Main function to update track position
+    function updateCarouselPosition() {
+      // Multiply index by 100 to shift by full slide widths
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    // Next Button Event Listener
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < totalSlides - 1) {
+	currentIndex++; // Move forward
+      } else {
+	currentIndex = 0; // Loop back to the first slide
+      }
+      updateCarouselPosition();
+    });
+
+    // Previous Button Event Listener
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+	currentIndex--; // Move backward
+      } else {
+	currentIndex = totalSlides - 1; // Loop to the last slide
+      }
+      updateCarouselPosition();
+    });
+
   </script>
 
 </body>
