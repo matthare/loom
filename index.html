@@ -415,20 +415,29 @@
 
     /* ─── Events -───────────────────────────────────────────────── */
     .events-carousel {
-      max-width: 620px;
+      max-width: 900px;
       margin: 0 auto;
       position: relative;
       overflow: hidden;
     }
     .events-carousel__track {
       display: flex;
+      gap: 1rem;
       transition: transform var(--transition);
     }
     .event-slide {
-      min-width: 100%;
+      min-width: 72%;
+      flex: 0 0 72%;
       display: grid;
       gap: 1rem;
       justify-items: center;
+      opacity: 0.55;
+      transform: scale(0.94);
+      transition: transform var(--transition), opacity var(--transition);
+    }
+    .event-slide.is-active {
+      opacity: 1;
+      transform: scale(1);
     }
     .event-slide a {
       display: block;
@@ -615,6 +624,10 @@
 
       .contact-cards { grid-template-columns: 1fr; }
       #contact { background-size: auto 100% ; }
+      .event-slide {
+        min-width: 84%;
+        flex-basis: 84%;
+      }
 
     }
   </style>
@@ -875,8 +888,8 @@
         <div class="events-carousel__controls">
           <button class="events-carousel__button" type="button" data-events-prev aria-label="Previous event">&#8592;</button>
           <div class="events-carousel__dots" aria-label="Event slides">
-            <button class="events-carousel__dot" type="button" data-events-dot="0" aria-label="Go to event 1" aria-current="true"></button>
-            <button class="events-carousel__dot" type="button" data-events-dot="1" aria-label="Go to event 2" aria-current="false"></button>
+            <button class="events-carousel__dot" type="button" data-events-dot="0" aria-label="Go to event 1" aria-current="false"></button>
+            <button class="events-carousel__dot" type="button" data-events-dot="1" aria-label="Go to event 2" aria-current="true"></button>
             <button class="events-carousel__dot" type="button" data-events-dot="2" aria-label="Go to event 3" aria-current="false"></button>
           </div>
           <button class="events-carousel__button" type="button" data-events-next aria-label="Next event">&#8594;</button>
@@ -1007,21 +1020,33 @@
       const prevButton = eventsCarousel.querySelector('[data-events-prev]');
       const nextButton = eventsCarousel.querySelector('[data-events-next]');
       const dots = Array.from(eventsCarousel.querySelectorAll('[data-events-dot]'));
-      let currentSlide = 0;
+      if (track && slides.length && prevButton && nextButton && dots.length) {
+        let currentSlide = Math.min(1, Math.max(slides.length - 1, 0));
 
-      const updateSlide = index => {
-        currentSlide = (index + slides.length) % slides.length;
-        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        const updateSlide = index => {
+          currentSlide = (index + slides.length) % slides.length;
+          const slideWidth = slides[0].getBoundingClientRect().width;
+          const trackStyle = getComputedStyle(track);
+          const gap = parseFloat(trackStyle.columnGap || trackStyle.gap || '0');
+          const step = slideWidth + gap;
+          const centerOffset = (eventsCarousel.clientWidth - slideWidth) / 2;
+          track.style.transform = `translateX(${centerOffset - (currentSlide * step)}px)`;
+          slides.forEach((slide, i) => {
+            slide.classList.toggle('is-active', i === currentSlide);
+          });
+          dots.forEach((dot, i) => {
+            dot.setAttribute('aria-current', String(i === currentSlide));
+          });
+        };
+
+        prevButton.addEventListener('click', () => updateSlide(currentSlide - 1));
+        nextButton.addEventListener('click', () => updateSlide(currentSlide + 1));
         dots.forEach((dot, i) => {
-          dot.setAttribute('aria-current', String(i === currentSlide));
+          dot.addEventListener('click', () => updateSlide(i));
         });
-      };
-
-      prevButton.addEventListener('click', () => updateSlide(currentSlide - 1));
-      nextButton.addEventListener('click', () => updateSlide(currentSlide + 1));
-      dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => updateSlide(i));
-      });
+        updateSlide(currentSlide);
+        window.addEventListener('resize', () => updateSlide(currentSlide));
+      }
     }
 
   </script>
