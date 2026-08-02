@@ -1025,12 +1025,10 @@
 
         const updateSlide = index => {
           currentSlide = (index + slides.length) % slides.length;
-          const slideWidth = slides[0].getBoundingClientRect().width;
-          const trackStyle = getComputedStyle(track);
-          const gap = parseFloat(trackStyle.columnGap || trackStyle.gap || '0');
-          const step = slideWidth + gap;
-          const centerOffset = (eventsCarousel.clientWidth - slideWidth) / 2;
-          track.style.transform = `translateX(${centerOffset - (currentSlide * step)}px)`;
+          const activeSlide = slides[currentSlide];
+          const slideCenter = activeSlide.offsetLeft + (activeSlide.offsetWidth / 2);
+          const carouselCenter = eventsCarousel.clientWidth / 2;
+          track.style.transform = `translateX(${carouselCenter - slideCenter}px)`;
           slides.forEach((slide, i) => {
             slide.classList.toggle('is-active', i === currentSlide);
           });
