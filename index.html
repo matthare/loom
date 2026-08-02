@@ -442,11 +442,11 @@
       transform: scale(1);
     }
     .event-slide.is-neighbor {
-      opacity: 0.8;
+      opacity: 0.5;
       transform: scale(0.96);
     }
     .event-slide.is-overflow-neighbor {
-      opacity: 0.55;
+      opacity: 0.25;
       transform: scale(0.92);
     }
     .event-slide a {
@@ -894,8 +894,8 @@
           <button class="events-carousel__button" type="button" data-events-prev aria-label="Previous event">&#8592;</button>
           <div class="events-carousel__dots" aria-label="Event slides">
             <button class="events-carousel__dot" type="button" data-events-dot="0" aria-label="Go to event 1" aria-current="false"></button>
-            <button class="events-carousel__dot" type="button" data-events-dot="1" aria-label="Go to event 2" aria-current="true"></button>
-            <button class="events-carousel__dot" type="button" data-events-dot="2" aria-label="Go to event 3" aria-current="false"></button>
+            <button class="events-carousel__dot" type="button" data-events-dot="1" aria-label="Go to event 2" aria-current="false"></button>
+            <button class="events-carousel__dot" type="button" data-events-dot="2" aria-label="Go to event 3" aria-current="true"></button>
           </div>
           <button class="events-carousel__button" type="button" data-events-next aria-label="Next event">&#8594;</button>
         </div>
@@ -1026,7 +1026,7 @@
       const nextButton = eventsCarousel.querySelector('[data-events-next]');
       const dots = Array.from(eventsCarousel.querySelectorAll('[data-events-dot]'));
       if (track && slides.length && prevButton && nextButton && dots.length) {
-        let currentSlide = Math.min(1, Math.max(slides.length - 1, 0));
+        let currentSlide = Math.min(2, Math.max(slides.length - 1, 0));
 
         const updateSlide = index => {
           currentSlide = (index + slides.length) % slides.length;
