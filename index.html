@@ -414,11 +414,78 @@
     }
 
     /* ─── Events -───────────────────────────────────────────────── */
-    .event-cards {
+    .events-carousel {
+      max-width: 620px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .events-carousel__track {
+      display: flex;
+      transition: transform var(--transition);
+    }
+    .event-slide {
+      min-width: 100%;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
       justify-items: center;
-      gap: 1.5rem;
+    }
+    .event-slide a {
+      display: block;
+      width: 100%;
+    }
+    .event-slide img {
+      width: 100%;
+      display: block;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+    }
+    .event-slide p {
+      margin: 0;
+      font-weight: 600;
+      text-align: center;
+      color: var(--color-primary);
+    }
+    .events-carousel__controls {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .events-carousel__button {
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-primary);
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 1.05rem;
+      line-height: 1;
+      transition: background var(--transition), color var(--transition);
+    }
+    .events-carousel__button:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+    .events-carousel__dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+    .events-carousel__dot {
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 999px;
+      border: 0;
+      background: rgba(139,58,58,0.28);
+      cursor: pointer;
+      padding: 0;
+    }
+    .events-carousel__dot[aria-current="true"] {
+      background: var(--color-primary);
     }
 
     /* ─── Contact ───────────────────────────────────────────────── */
@@ -772,38 +839,48 @@
         <div class="divider"></div>
         <p>Find Rose Handwovens at local festivals and open studios.</p>
       </div>
-      <div class="event-cards">
-        <div>
-          <a href="https://goreplace.org/sheepshearing-festival" target="_blank">
-            <img
-              src="events/gore_place_sheep.jpg"
-              alt="Gore Place Sheep Shearing Festival event poster"
-              loading="lazy"      
-            >
-          </a>
+      <div class="events-carousel" id="eventsCarousel" aria-label="Events carousel">
+        <div class="events-carousel__track">
+          <article class="event-slide">
+            <a href="https://goreplace.org/sheepshearing-festival" target="_blank" rel="noopener noreferrer">
+              <img
+                src="events/gore_place_sheep.jpg"
+                alt="Gore Place Sheep Shearing Festival event poster"
+                loading="lazy"
+              >
+            </a>
+            <p>Gore Place Sheep Shearing Festival 2026</p>
+          </article>
+          <article class="event-slide">
+            <a href="https://artscollabmedford.org/medfordopenstudios#!directory" target="_blank" rel="noopener noreferrer">
+              <img
+                src="events/medford2026.jpg"
+                alt="Medford Open Studios 2026 event poster"
+                loading="lazy"
+              >
+            </a>
+            <p>I will be in Breed Hall at Tufts University</p>
+          </article>
+          <article class="event-slide">
+            <a href="https://yourarlington.com/event/art-on-the-green/" target="_blank" rel="noopener noreferrer">
+              <img
+                src="events/arlington2026.png"
+                alt="Arlington Art on the Green 2026 event poster"
+                loading="lazy"
+              >
+            </a>
+            <p>Arlington Art on the Green 2026</p>
+          </article>
         </div>
-        <div>
-          <a href="https://artscollabmedford.org/medfordopenstudios#!directory" target="_blank">
-            <img
-              src="events/medford2026.jpg"
-              alt="Medford Open Studios 2026 event poster"
-              loading="lazy"
-            >
-          </a>
+        <div class="events-carousel__controls">
+          <button class="events-carousel__button" type="button" data-events-prev aria-label="Previous event">&#8592;</button>
+          <div class="events-carousel__dots" aria-label="Event slides">
+            <button class="events-carousel__dot" type="button" data-events-dot="0" aria-label="Go to event 1" aria-current="true"></button>
+            <button class="events-carousel__dot" type="button" data-events-dot="1" aria-label="Go to event 2" aria-current="false"></button>
+            <button class="events-carousel__dot" type="button" data-events-dot="2" aria-label="Go to event 3" aria-current="false"></button>
+          </div>
+          <button class="events-carousel__button" type="button" data-events-next aria-label="Next event">&#8594;</button>
         </div>
-        <div>
-          <a href="https://yourarlington.com/event/art-on-the-green/" target="_blank">
-            <img
-              src="events/arlington2026.png"
-              alt="Arlington Art on the Green 2026 event poster"
-              loading="lazy"
-            >
-          </a>
-        </div>
-        <span>Gore Place Sheep Shearing Festival 2026</span>
-        <span>I will be in Breed Hall at Tufts University</span>
-        <span>Arlington Art on the Green 2026</span>
-        <div></div>
       </div>
     </div>
   </section>
@@ -922,6 +999,30 @@
         toggle.setAttribute('aria-expanded', 'false');
       })
     );
+
+    const eventsCarousel = document.getElementById('eventsCarousel');
+    if (eventsCarousel) {
+      const track = eventsCarousel.querySelector('.events-carousel__track');
+      const slides = Array.from(eventsCarousel.querySelectorAll('.event-slide'));
+      const prevButton = eventsCarousel.querySelector('[data-events-prev]');
+      const nextButton = eventsCarousel.querySelector('[data-events-next]');
+      const dots = Array.from(eventsCarousel.querySelectorAll('[data-events-dot]'));
+      let currentSlide = 0;
+
+      const updateSlide = index => {
+        currentSlide = (index + slides.length) % slides.length;
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        dots.forEach((dot, i) => {
+          dot.setAttribute('aria-current', String(i === currentSlide));
+        });
+      };
+
+      prevButton.addEventListener('click', () => updateSlide(currentSlide - 1));
+      nextButton.addEventListener('click', () => updateSlide(currentSlide + 1));
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => updateSlide(i));
+      });
+    }
 
   </script>
 
