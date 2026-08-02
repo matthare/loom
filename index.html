@@ -415,29 +415,39 @@
 
     /* ─── Events -───────────────────────────────────────────────── */
     .events-carousel {
-      max-width: 900px;
+      --events-gap: 1rem;
+      --events-visible-slides: 3.5;
+      max-width: min(1040px, calc(100vw - 4rem));
       margin: 0 auto;
       position: relative;
       overflow: hidden;
     }
     .events-carousel__track {
       display: flex;
-      gap: 1rem;
+      gap: var(--events-gap);
       transition: transform var(--transition);
     }
     .event-slide {
-      min-width: 72%;
-      flex: 0 0 72%;
+      min-width: calc((100% - (var(--events-gap) * 4)) / var(--events-visible-slides));
+      flex: 0 0 calc((100% - (var(--events-gap) * 4)) / var(--events-visible-slides));
       display: grid;
       gap: 1rem;
       justify-items: center;
-      opacity: 0.55;
-      transform: scale(0.94);
+      opacity: 0.35;
+      transform: scale(0.9);
       transition: transform var(--transition), opacity var(--transition);
     }
     .event-slide.is-active {
       opacity: 1;
       transform: scale(1);
+    }
+    .event-slide.is-neighbor {
+      opacity: 0.8;
+      transform: scale(0.96);
+    }
+    .event-slide.is-overflow-neighbor {
+      opacity: 0.55;
+      transform: scale(0.92);
     }
     .event-slide a {
       display: block;
@@ -624,11 +634,6 @@
 
       .contact-cards { grid-template-columns: 1fr; }
       #contact { background-size: auto 100% ; }
-      .event-slide {
-        min-width: 84%;
-        flex-basis: 84%;
-      }
-
     }
   </style>
 </head>
@@ -1030,7 +1035,12 @@
           const carouselCenter = eventsCarousel.clientWidth / 2;
           track.style.transform = `translateX(${carouselCenter - slideCenter}px)`;
           slides.forEach((slide, i) => {
-            slide.classList.toggle('is-active', i === currentSlide);
+            const forwardDistance = (i - currentSlide + slides.length) % slides.length;
+            const backwardDistance = (currentSlide - i + slides.length) % slides.length;
+            const distance = Math.min(forwardDistance, backwardDistance);
+            slide.classList.toggle('is-active', distance === 0);
+            slide.classList.toggle('is-neighbor', distance === 1);
+            slide.classList.toggle('is-overflow-neighbor', distance === 2);
           });
           dots.forEach((dot, i) => {
             dot.setAttribute('aria-current', String(i === currentSlide));
